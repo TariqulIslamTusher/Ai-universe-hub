@@ -19,7 +19,7 @@
             <div class="navbar-start">
                 <a class="btn btn-ghost normal-case text-3xl">DaisyUI</a>
             </div>
-    
+
             <div class="navbar-end">
                 <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">Sort By Date</a>
             </div>
@@ -27,13 +27,26 @@
     </header>
 
     <main class="container mx-auto mt-5">
+        <!-- card container -->
         <section id="card-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
-            
         </section>
+
+        <!-- Adding a spinner -->
+        <div id="spinner" class=" text-center mt-6 sm:mt-52 md:mt-72 hidden">
+            <progress class="progress w-72 h-16 font-bold text-5xl"></progress>
+        </div>
+        <!-- all card showing button  -->
         <div id="seeMore" onclick="showAllCard()" class="text-center p-12 hidden">
             <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">See More</a>
         </div>
+        <!-- Modal container -->
+        <!-- The button to open modal -->
+
+
+        <!-- Put this part before </body> tag -->
+
+
     </main>
 
 
@@ -44,4 +57,5 @@
     <script src="./script/script.js"></script>
     <script src="./script/tailwind.config.js"></script>
 </body>
+
 </html>

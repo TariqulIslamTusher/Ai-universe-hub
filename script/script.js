@@ -58,31 +58,49 @@ const displayData = (data , isLimit) =>{
                         <div class="flex"><p class="text-xl"><i class="fa-regular fa-calendar-days mr-3"></i><span id="date">${published_in}</span></p></div>
                     </div>
 
-                    <button onclick="receivedModalClick('${id}')" class="footer-arrow btn-warning bg-yellow-200 rounded-xl px-4 py-3"><i class="fa-solid fa-arrow-right"></i></button>
+                    
+                    <label onclick="receivedModalClick('${id}')" for="my-modal-5" class="btn bg-yellow-300 border-0 rounded-xl px-4 py-3"><i class="fa-solid fa-arrow-right"></i></label>
                 </div>
             </div>
         `
         cardContainer.appendChild(cardDiv)        
     });
     
-    
+    spinners()
 }
 // create the modal display functions
 const receivedModalClick = id =>{
     fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
     .then(res => res.json())
-    .then(data => openModal(data))
+    .then(data => openModal(data.data))
 }
 
 // function for open a modal
+const openModal = id => {
+    const modalContainer = document.getElementById('modal-container')
+    const {} = id
+    modalContainer.innerHTML=`
+        
+    `
+}
 
 
 
+// create a spinners function
+const spinners = (isSpin)=>{
+    if(isSpin){
+        document.getElementById('spinner').classList.remove('hidden')
+    } else{
+        document.getElementById('spinner').classList.add('hidden')
+    }
+}
 // on click show all show all the card
 const showAllCard = () =>{
+    spinners(true)
     loadData(false)
 }
 
 const showLimitedCard = () => {
+    spinners(true)
     loadData(true)
 }
