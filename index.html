@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body onload="showLimitedCard()">
     <header class="shadow-lg py-4">
         <div class="navbar bg-base-100 container mx-auto">
             <div class="navbar-start">
@@ -21,16 +21,19 @@
             </div>
     
             <div class="navbar-end">
-                <a class="btn bg-red-500 border-0">Sort By Date</a>
+                <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">Sort By Date</a>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto mt-5">
-        <section id="card-container" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <section id="card-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
             
         </section>
+        <div id="seeMore" onclick="showAllCard()" class="text-center p-12 hidden">
+            <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">See More</a>
+        </div>
     </main>
 
 
