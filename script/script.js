@@ -40,14 +40,9 @@ const displayData = (data , isLimit) =>{
 
                 <div class="card-body px-0 border-b-4">
                     <h2 class="card-title text-4xl font-semibold my-3">Features</h2>
-                    <ol id='tempOl' type="1">
-                        <li>${features[0]? features[0] : ''}</li>
-                        <li>${features[1]? features[1] : ''}</li>
-                        <li>${features[2]? features[2] : ''}</li>
-                        <li>${features[3]? features[3] : ''}</li>
-                        <li>${features[4]? features[4] : ''}</li>
-                        <li>${features[5]? features[5] : ''}</li>
-                        <li>${features[6]? features[6] : ''}</li>
+                    <ol class='list-decimal px-4' type="1">${features.map(feature=>`
+                        <li>${feature}</li>
+                                            `).join('')}
                     </ol>
                 
                 </div>
@@ -78,10 +73,7 @@ const receivedModalClick = id =>{
 // function for open a modal
 const openModal = id => {
     const modalContainer = document.getElementById('modal-container')
-    const {} = id
-    modalContainer.innerHTML=`
-        
-    `
+    console.log(id)
 }
 
 
