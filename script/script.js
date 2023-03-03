@@ -53,8 +53,7 @@ const displayData = (data , isLimit) =>{
                         <div class="flex"><p class="text-xl"><i class="fa-regular fa-calendar-days mr-3"></i><span id="date">${published_in}</span></p></div>
                     </div>
 
-                    
-                    <label onclick="receivedModalClick('${id}')" for="my-modal-5" class="btn bg-yellow-300 border-0 rounded-xl px-4 py-3"><i class="fa-solid fa-arrow-right"></i></label>
+                    <label onclick="receivedModalClick('${id}')" for="my-modal-5" class="btn bg-yellow-300 border-0 rounded-2xl px-4 py-3"><i class="fa-solid fa-arrow-right"></i></label>
                 </div>
             </div>
         `
