@@ -33,7 +33,7 @@ const displayData = (data , isLimit) =>{
         const cardDiv = document.createElement('div')
 
         cardDiv.innerHTML = `
-            <div class="card w-full p-6 bg-base-100 shadow-2xl">
+            <div class="card w-full h-full p-6 bg-base-100 shadow-2xl">
                 <figure>
                     <img class='md:h-52 md:w-full' src="${image? image:"No Photos Found"}" alt="Shoes" />
                 </figure>
@@ -77,32 +77,31 @@ const openModal = id => {
     const {description, accuracy, image_link, pricing, input_output_examples, features} = id
 
 
-    console.log(features)
+    console.log(id)
     document.getElementById('description').innerText = description
     document.getElementById('figure').innerHTML =`
         <img class="md:h-full w-auto my-3" src=${image_link[0]}>
         <h2 class='absolute right-0 top-1 bg-red-500 text-xl text-white px-1'>${accuracy.score? `${accuracy.score}% accuracy` :""}</h2>
     `
     document.getElementById('pricing').innerHTML =`
-        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md max-w-full leading-normal text-green-500"><p>${pricing[0].price}</p>
-        <p>${pricing[0].plan}</p></div>
-        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md max-w-full leading-normal text-blue-500"><p>${pricing[1].price}</p>
-        <p>${pricing[1].plan}</p></div>
-        <div class="p-2 text-center content-center shadow-lg text-lg h-full bg-white rounded-md max-w-full leading-normal text-red-500"><p>${pricing[2].price}</p>
-        <p>${pricing[2].plan}</p></div>
+        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-green-500"><p>${pricing? pricing[0].price : "Free Of Cost"}</p>
+        <p>${pricing? pricing[0].plan : ''}</p></div>
+        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-blue-500"><p>${pricing? pricing[1].price : "Free Of Cost"}</p>
+        <p>${pricing? pricing[1].plan : ''}</p></div>
+        <div class="p-2 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-red-500"><p>${pricing? pricing[2].price : "Free Of Cost"}</p>
+        <p>${pricing? pricing[2].plan : ''}</p></div>
 
     `
-    document.getElementById('input').innerText = input_output_examples? input_output_examples[0].input : "No Input";
-    document.getElementById('output').innerText = input_output_examples? input_output_examples[0].output : "No Output";
-
-
-
+    document.getElementById('input').innerText = input_output_examples? input_output_examples[0].input : "Can you give any example?";
+    document.getElementById('output').innerText = input_output_examples? input_output_examples[0].output : "No! Not Yet! Take a break!!!";
+    // features informations
     document.getElementById('olFeatures').innerHTML = `
-        <li>${features['1'].feature_name}</li>
-        <li>${features['2'].feature_name}</li>
-        <li>${features['3'].feature_name}</li>
+        ${features['1']? `<li>${features['1'].feature_name}</li>` : ""}
+        ${features['2']? `<li>${features['2'].feature_name}</li>` : ""}
+        ${features['3']? `<li>${features['3'].feature_name}</li>` : ""}
+        ${features['4']? `<li>${features['4'].feature_name}</li>` : ""}
     `
-        
+
     
 }
 
