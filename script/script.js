@@ -31,9 +31,10 @@ const displayData = (data , isLimit) =>{
         // destructing the object 
         const {id, name, published_in, image, features} = element;
         const cardDiv = document.createElement('div')
+        
 
         cardDiv.innerHTML = `
-            <div class="card w-full h-full p-6 bg-base-100 shadow-2xl">
+            <div class="card w-full h-full p-6 bg-base-100 shadow-2xl border hover:border-4:border-blue-700">
                 <figure>
                     <img class='md:h-52 md:w-full' src="${image? image:"No Photos Found"}" alt="Shoes" />
                 </figure>
@@ -74,10 +75,8 @@ const openModal = id => {
     const modalContainer = document.getElementById('modal-container')
     
     // destruction of object id 
-    const {description, accuracy, image_link, pricing, input_output_examples, features} = id
+    const {description, accuracy, image_link, pricing, input_output_examples, features, integrations} = id
 
-
-    console.log(id)
     document.getElementById('description').innerText = description
     document.getElementById('figure').innerHTML =`
         <img class="md:h-full w-auto my-3" src=${image_link[0]}>
@@ -101,7 +100,10 @@ const openModal = id => {
         ${features['3']? `<li>${features['3'].feature_name}</li>` : ""}
         ${features['4']? `<li>${features['4'].feature_name}</li>` : ""}
     `
-
+    // Intigrations informations
+    document.getElementById('olIntigrations').innerHTML = `${integrations.map(integration =>
+        `<li>${integration}</li>`).join("")}`
+        
     
 }
 
