@@ -74,10 +74,10 @@ const openModal = id => {
     const modalContainer = document.getElementById('modal-container')
     
     // destruction of object id 
-    const {description, accuracy, image_link, pricing, input_output_examples} = id
+    const {description, accuracy, image_link, pricing, input_output_examples, features} = id
 
 
-    console.log(id)
+    console.log(features)
     document.getElementById('description').innerText = description
     document.getElementById('figure').innerHTML =`
         <img class="md:h-full w-auto my-3" src=${image_link[0]}>
@@ -97,7 +97,11 @@ const openModal = id => {
 
 
 
-    // document.getElementById('olFeatures').innerText = `${description}`
+    document.getElementById('olFeatures').innerHTML = `
+        <li>${features['1'].feature_name}</li>
+        <li>${features['2'].feature_name}</li>
+        <li>${features['3'].feature_name}</li>
+    `
         
     
 }
