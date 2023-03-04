@@ -134,8 +134,6 @@ const showAllCard = () => {
         document.getElementById('seeMore').innerText = "SEE MORE"
         isClicked = false;
     } 
-    
-
 }
 
 // TODO: accending or decending by button
@@ -167,5 +165,10 @@ const descendedDate = () =>{
         displayData(sortData)
     }
 }
+
+// default button 
+document.getElementById('default').addEventListener('click', function(){
+    displayData(universal.slice(0,6))
+})
 
 loadData()
