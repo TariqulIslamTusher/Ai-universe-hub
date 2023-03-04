@@ -1,5 +1,6 @@
-// Declare the first fatching function
+// declare a universal variable to store the fetching data
 let universal;
+// Declare the first fetching function
 const loadData = async () => {
     try {
         const URL = "https://openapi.programming-hero.com/api/ai/tools"
@@ -33,7 +34,6 @@ const displayData = (data) => {
                     <ol class='list-decimal px-4' type="1">
                         ${features.map(feature => `<li>${feature}</li>`).join('')}
                     </ol>
-                
                 </div>
 
                 <div class="card-footer py-3 flex justify-between items-center">
@@ -41,19 +41,19 @@ const displayData = (data) => {
                         <h2 class="my-3 text-4xl font-semibold">${name}</h2>
                         <div class="flex"><p class="text-2xl"><i class="fa-regular fa-calendar-days mr-3"></i><span id="date">${published_in}</span></p></div>
                     </div>
-
+                    
                     <label onclick="receivedModalClick('${id}')" for="my-modal-5" class="btn bg-transparent text-black border-2 rounded-full text-2xl font-bold px-4 py-3 align-middle hover:text-white"><i class="fa-solid fa-arrow-right"></i></label>
                 </div>
             </div>
         `
         cardContainer.appendChild(cardDiv)
     });
-
+    // spinners with falsy value: mentionable that being empty is also a falsy value
     spinners()
 }
 
 
-// create the modal display functions
+// fetch data by category to show on modal
 const receivedModalClick = id => {
     fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
         .then(res => res.json())
@@ -104,9 +104,7 @@ const openModal = id => {
         `<li>${integration}</li>`).join(""):"No Data Found" }`
 }
 
-
-
-// create a spinners function
+// TODO: create a spinners function
 const spinners = (isSpin) => {
     if (isSpin) {
         document.getElementById('spinner').classList.remove('hidden')
@@ -117,7 +115,8 @@ const spinners = (isSpin) => {
 }
 
 
-// TODO: on click show all show all the card
+// TODO: on click show all the card
+// declare a variable with falsy value
 let isClicked = false;
 
 const showAllCard = () => {
@@ -126,18 +125,19 @@ const showAllCard = () => {
     if(seeMore === "SEE MORE"){
         displayData(universal)
         document.getElementById('seeMore').innerText = "SEE LESS"
-
         isClicked = true;
     }
     else{
+        // try to make the see more button dynamic to convert show less
         displayData(universal.slice(0,6));
         document.getElementById('seeMore').innerText = "SEE MORE"
+        // on show less isClicked must be false for ascending and descending
         isClicked = false;
     } 
 }
 
 // TODO: accending or decending by button
-// accending order
+//! accending order
 document.getElementById('decendingtDate').addEventListener('click', function () {
     if(isClicked){
         const sortedData = [...universal]
@@ -152,7 +152,7 @@ document.getElementById('decendingtDate').addEventListener('click', function () 
 
 })
 
-// decending order
+//! decending order
 const descendedDate = () =>{
     if(isClicked){
         const sortData = [...universal]
@@ -166,9 +166,9 @@ const descendedDate = () =>{
     }
 }
 
-// default button 
+//TODO make the website logo into default button 
 document.getElementById('default').addEventListener('click', function(){
     displayData(universal.slice(0,6))
 })
-
+// ! Call the function 
 loadData()
