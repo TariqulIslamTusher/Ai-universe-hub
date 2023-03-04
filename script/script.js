@@ -6,7 +6,7 @@ const loadData = async () => {
         const res = await fetch(URL);
         const data = await res.json()
         universal = data.data.tools;
-        displayData(data.data.tools.slice(0, 6))
+        displayData(universal.slice(0,6))
     } catch (error) {
         console.log(error, 'check on loadData function')
     }
@@ -14,9 +14,9 @@ const loadData = async () => {
 
 // Declare first function to display the url into card
 const displayData = (data) => {
+    document.getElementById('seeMore').classList.remove('hidden')
     const cardContainer = document.getElementById('card-container')
     cardContainer.innerHTML = ""
-
     // TODO: apply foreach for the array named data
     data.forEach(element => {
 
@@ -24,7 +24,7 @@ const displayData = (data) => {
         const { id, name, published_in, image, features } = element;
         const cardDiv = document.createElement('div')
         cardDiv.innerHTML = `
-            <div class="card w-full h-full p-6 bg-base-100 shadow-2xl border-4 border-blue-200 hover:border-blue-800 delay-75">
+            <div class="card w-full h-full p-6 bg-base-100 shadow-2xl border-4 border-blue-200 hover:border-blue-800 delay-75 ">
                 <figure>
                     <img class='md:h-52 md:w-full' src="${image ? image : "No Photos Found"}" alt="Shoes" />
                 </figure>
@@ -66,12 +66,6 @@ const openModal = id => {
     // destruction of object id 
     const { description, accuracy, image_link, pricing, input_output_examples, features, integrations } = id
 
-    //! remove later
-            const arrayOfArray = Object.entries(features)
-                const eachArray = arrayOfArray.map(feature=>feature[1].feature_name)
-            console.log(eachArray);
-    //! remove later
-
     document.getElementById('description').innerText = description
     document.getElementById('figure').innerHTML = `
         <img class="md:h-full w-auto my-3" src=${image_link[0]}>
@@ -97,12 +91,18 @@ const openModal = id => {
     document.getElementById('input').innerText = input_output_examples ? input_output_examples[0].input : "Can you give any example?";
     document.getElementById('output').innerText = input_output_examples ? input_output_examples[0].output : "No! Not Yet! Take a break!!!";
 
+    //! make the features an array by entries
+    const arrayOfFeatures = Object.entries(features)
+    // loop on each property of array , then get the array pair and access no 1 index
+    // arrayOfFeatures makes the new array of the feature_name, cause .map returns an array
+    const eachArray = arrayOfFeatures.map(feature => feature[1].feature_name)
+
     // features informations
-    document.getElementById('olFeatures').innerHTML = `${features? eachArray.map(name=> `<li>${name}</li>` ).join(''):'No data found'}
-    `
-    // Intigrations informations
+    document.getElementById('olFeatures').innerHTML = `${features? eachArray.map(name=> `<li>${name}</li>` ).join(''):'No data found'}`
+
+    //! Intigrations informations
     document.getElementById('olIntigrations').innerHTML = `${integrations ? integrations.map(integration =>
-        `<li>${integration ? integration : "No Data Found"}</li>`).join(""):"No Data Found" }`
+        `<li>${integration}</li>`).join(""):"No Data Found" }`
 }
 
 
@@ -113,35 +113,50 @@ const spinners = (isSpin) => {
         document.getElementById('spinner').classList.remove('hidden')
     } else {
         document.getElementById('spinner').classList.add('hidden')
+        document.getElementById('seeMore').classList.remove('hidden')
     }
 }
 
 
 // TODO: on click show all show all the card
 let isClicked = false;
-const showAllCard = async () => {
+
+const showAllCard = () => {
     spinners(true)
     displayData(universal)
     document.getElementById('seeMore').classList.add('hidden')
-    isClicked = true
+    isClicked = true;
+}
+
+// TODO: accending or decending by button
+// accending order
+document.getElementById('decendingtDate').addEventListener('click', function () {
+    if(isClicked){
+        const sortedData = [...universal]
+        sortedData.sort((p1, p2) => (new Date(p1.published_in) > new Date(p2.published_in)) ? 1 : (new Date(p1.published_in) < new Date(p2.published_in)) ? -1 : 0);
+        displayData(sortedData)
+        document.getElementById('seeMore').classList.add('hidden')
+    }else{
+        const sortedData = [...universal.slice(0,6)]
+        sortedData.sort((p1, p2) => (new Date(p1.published_in) > new Date(p2.published_in)) ? 1 : (new Date(p1.published_in) < new Date(p2.published_in)) ? -1 : 0);
+        displayData(sortedData)
+    }
+
+})
+
+// decending order
+const dccnData = () =>{
+    if(isClicked){
+        const sortData = [...universal]
+        sortData.sort((a,b) => (new Date(a.published_in) < new Date(b.published_in))? 1: (new Date(a.published_in) > new Date(b.published_in))?-1:0); 
+        displayData(sortData)
+        document.getElementById('seeMore').classList.add('hidden')
+
+    } else{
+        const sortData = [...universal.slice(0,6)]
+        sortData.sort((a,b) => (new Date(a.published_in) < new Date(b.published_in))? 1: (new Date(a.published_in) > new Date(b.published_in))?-1:0);
+        displayData(sortData)
+    }
 }
 
 loadData()
-
-
-
-
-document.getElementById('sortDate').addEventListener('click', function () {
-    // document.getElementById('card-container').innerHTML = ""
-    if(isClicked){
-        const sortedData = [...universal]
-        sortedData.sort((p1, p2) => (p1.published_in < p2.published_in) ? -1 : (p1.price > p2.price) ? 1 : 0);
-         displayData(sortedData)
-    }else{
-        const sortedData = [...universal.slice(0,6)]
-        sortedData.sort((p1, p2) => (p1.published_in < p2.published_in) ? -1 : (p1.price > p2.price) ? 1 : 0);
-        displayData(sortedData)
-    }
-    console.log(isClicked);
-    // sortByDate(data)
-})

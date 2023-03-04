@@ -11,21 +11,23 @@
     <!-- daisyUI linkup  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
-<body>
-    <header class="shadow-lg py-4">
+<body class="bg-blue-100">
+    <header class="shadow-lg py-4 bg-white">
         <div class="navbar bg-base-100 container mx-auto flex flex-col sm:flex-row sm:justify-between">
             <div class="md:navbar-start">
-                <a class="btn btn-ghost normal-case text-3xl">AI Universe Hub</a>
+                <a href="#" class="btn btn-ghost normal-case text-4xl">AI Universe Hub</a>
             </div>
 
-            <div id="sortDate" class="md:navbar-end">
-                <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">Sort By Date</a>
+            <div class="md:navbar-end">
+                <a id="decendingtDate" class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">Accend Date</a>
+                <a onclick="dccnData()" class="btn bg-gradient-to-b to-cyan-500 from-green-500 border-0 rounded-md text-xl ml-1">Deccent Date</a>
             </div>
         </div>
     </header>
-
+    <!-- main section  -->
     <main class="container mx-auto mt-5">
         <!-- card container -->
         <section id="card-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -34,11 +36,13 @@
 
         <!-- Adding a spinner -->
         <div id="spinner" class=" mt-16 md:mt-36 text-center">
-            <div class="radial-progress animate-spin font-bold" style="--value:70; --size:12rem; --thickness: 2px;"></div>
+            <div class="fixed top-0 right-0 h-screen w-screen z-50 flex justify-center items-center">
+                <div class="animate-spin rounded-full h-44 w-44 border-t-8 border-b-8 border-blue-900"></div>
+             </div>
         </div>
 
         <!-- all card showing button -->
-        <div id="seeMore" onclick="showAllCard()" class="text-center p-12">
+        <div id="seeMore" onclick="showAllCard()" class="text-center p-12 hidden">
             <a class="btn bg-gradient-to-b from-red-400 to-red-600 border-0 rounded-md text-xl">See More</a>
         </div>
 
@@ -48,7 +52,7 @@
         <section id="modal-container">
             <input type="checkbox" id="my-modal-5" class="modal-toggle" />
             <div class="modal">
-                <div class="modal-box w-11/12 max-w-6xl relative h-full">
+                <div class="modal-box w-11/12 max-w-6xl relative">
                     <label for="my-modal-5" class="btn btn-sm btn-circle hover:bg-red-500 border-0 text-xl absolute right-2 top-2">✕</label>
 
                     <section class="grid grid-cols-1 md:grid-cols-2 gap-3">
