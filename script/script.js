@@ -14,7 +14,6 @@ const loadData = async () => {
 
 // Declare first function to display the url into card
 const displayData = (data) => {
-    document.getElementById('seeMore').classList.remove('hidden')
     const cardContainer = document.getElementById('card-container')
     cardContainer.innerHTML = ""
     // TODO: apply foreach for the array named data
@@ -72,17 +71,17 @@ const openModal = id => {
         <h2 class='absolute right-0 top-1 bg-red-500 text-xl text-white px-1'>${accuracy.score ? `${accuracy.score}% accuracy` : ""}</h2>
     `
     document.getElementById('pricing').innerHTML = `
-        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-green-500">
+        <div class="p-3 py-5 text-center content-center shadow-lg text-sm md:text-md xl:text-lg h-full bg-white rounded-md w-full leading-normal text-green-500">
             <p>${pricing ? pricing[0].price : "Free Of Cost"}</p>
             <p>${pricing ? pricing[0].plan : ''}</p>
         </div>
 
-        <div class="p-3 py-5 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-blue-500">
+        <div class="p-3 py-5 text-center content-center shadow-lg text-sm md:text-md xl:text-lg h-full bg-white rounded-md w-full leading-normal text-blue-500">
             <p>${pricing ? pricing[1].price : "Free Of Cost"}</p>
             <p>${pricing ? pricing[1].plan : ''}</p>
         </div>
 
-        <div class="p-2 text-center content-center shadow-lg text-lg h-full bg-white rounded-md w-full leading-normal text-red-500">
+        <div class="p-2 text-center content-center shadow-lg text-sm md:text-md xl:text-lg h-full bg-white rounded-md w-full leading-normal text-red-500">
             <p>${pricing ? pricing[2].price : "Free Of Cost"}</p>
             <p>${pricing ? pricing[2].plan : ''}</p>
         </div>
@@ -123,9 +122,20 @@ let isClicked = false;
 
 const showAllCard = () => {
     spinners(true)
-    displayData(universal)
-    document.getElementById('seeMore').classList.add('hidden')
-    isClicked = true;
+    const seeMore = document.getElementById('seeMore').innerText
+    if(seeMore === "SEE MORE"){
+        displayData(universal)
+        document.getElementById('seeMore').innerText = "SEE LESS"
+
+        isClicked = true;
+    }
+    else{
+        displayData(universal.slice(0,6));
+        document.getElementById('seeMore').innerText = "SEE MORE"
+        isClicked = false;
+    } 
+    
+
 }
 
 // TODO: accending or decending by button
@@ -135,7 +145,7 @@ document.getElementById('decendingtDate').addEventListener('click', function () 
         const sortedData = [...universal]
         sortedData.sort((p1, p2) => (new Date(p1.published_in) > new Date(p2.published_in)) ? 1 : (new Date(p1.published_in) < new Date(p2.published_in)) ? -1 : 0);
         displayData(sortedData)
-        document.getElementById('seeMore').classList.add('hidden')
+        // document.getElementById('seeMore').classList.add('hidden')
     }else{
         const sortedData = [...universal.slice(0,6)]
         sortedData.sort((p1, p2) => (new Date(p1.published_in) > new Date(p2.published_in)) ? 1 : (new Date(p1.published_in) < new Date(p2.published_in)) ? -1 : 0);
@@ -145,12 +155,11 @@ document.getElementById('decendingtDate').addEventListener('click', function () 
 })
 
 // decending order
-const dccnData = () =>{
+const descendedDate = () =>{
     if(isClicked){
         const sortData = [...universal]
         sortData.sort((a,b) => (new Date(a.published_in) < new Date(b.published_in))? 1: (new Date(a.published_in) > new Date(b.published_in))?-1:0); 
         displayData(sortData)
-        document.getElementById('seeMore').classList.add('hidden')
 
     } else{
         const sortData = [...universal.slice(0,6)]
