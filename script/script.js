@@ -53,12 +53,16 @@ const displayData = (data) => {
 }
 
 
+
+
 // fetch data by category to show on modal
 const receivedModalClick = id => {
     fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
         .then(res => res.json())
         .then(data => openModal(data.data))
 }
+
+
 
 // function for open a modal
 const openModal = id => {
